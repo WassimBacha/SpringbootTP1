@@ -14,9 +14,9 @@ public class UtulisateurControllers {
 	 private UtulisateurService userServ ;
 	 
 	 @PostMapping("/addUser")
-	 public ResponseEntity<Object> save(@RequestBody Utulisateur user {
+	 public ResponseEntity<Object> save(@RequestBody Utulisateur user ){
 		 return userServ.addUser(user);
-	 })
+	 }
 
 	 
 
