@@ -10,8 +10,10 @@ import tn.itbs.tp1.entities.Projet;
 import tn.itbs.tp1.entities.Tache;
 import tn.itbs.tp1.service.TacheService;
 
+import java.util.List;
 import java.util.Optional;
-//test git v2
+//test git v3
+//test git v3
 
 @RestController
 @RequestMapping("/taches")
@@ -34,6 +36,11 @@ public class TacheController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache n'existe pas");
         }
 
+    }
+    @GetMapping
+    public ResponseEntity<List<Tache>> getAllTaches() {
+        List<Tache> tache = tacheService.getAllTaches();
+        return ResponseEntity.ok(tache);
     }
 
 }
