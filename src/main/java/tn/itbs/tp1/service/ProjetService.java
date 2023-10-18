@@ -57,7 +57,7 @@ private ProjetRepo projetRepo;
                             projetRepo.deleteById(id);
                         },
                         () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Projet n'existe pas");
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "projet n'existe pas");
                         });
 
         return ResponseEntity.ok().body("projet supprimé avec succe");

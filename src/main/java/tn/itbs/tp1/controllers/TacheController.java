@@ -14,15 +14,16 @@ import java.util.List;
 import java.util.Optional;
 //test git v3
 //test git v3
+@RequestMapping("/taches")
+
 
 @RestController
-@RequestMapping("/taches")
 public class TacheController {
 
     @Autowired
     private TacheService tacheService;
 
-    @PostMapping("/addProject")
+    @PostMapping("/addtache")
     public ResponseEntity<Object> addTache(@RequestBody Tache tache) {
         return tacheService.addTache(tache);
     }
@@ -41,6 +42,15 @@ public class TacheController {
     public ResponseEntity<List<Tache>> getAllTaches() {
         List<Tache> tache = tacheService.getAllTaches();
         return ResponseEntity.ok(tache);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateTache(@PathVariable int id, @RequestBody Tache tache) {
+        return tacheService.updateTache(id, tache);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletetache(@PathVariable int id) {
+        return tacheService.deletetache(id);
     }
 
 }

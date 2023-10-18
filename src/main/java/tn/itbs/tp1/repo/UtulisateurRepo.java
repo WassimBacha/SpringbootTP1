@@ -6,4 +6,5 @@ import tn.itbs.tp1.entities.Utulisateur;
 
 public interface UtulisateurRepo extends JpaRepository<Utulisateur, Integer> {
 
+
 }

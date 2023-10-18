@@ -36,35 +36,45 @@ public class TacheService {
         return (List<Tache>) tacheRepo.findAll();
     }
 
-    public Tache updateTache(int id, Tache tache){
+    public ResponseEntity<Object> updateTache(int id, Tache tache){
         tacheRepo.findById(id)
                 .ifPresentOrElse(
                         p -> {
                             tache.setId(id);
                             tacheRepo.save(tache);
+
                         },
                         () -> {
                             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache n'existe pas");
                         });
 
-        return tache;
+        return ResponseEntity.ok().body("tache Modifier avec succe");
 
     }
-    public void deleteTache(int id) {
-        tacheRepo.deleteById(id);
-    }
-    public List<Tache> getTachesByProjectId(int id) {
+    public ResponseEntity<Object> deletetache(int id) {
+        tacheRepo.findById(id)
+                .ifPresentOrElse(
+                        p -> {
+                            tacheRepo.deleteById(id);
+                        },
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "tache n'existe pas");
+                        });
 
-        return null;
+        return ResponseEntity.ok().body("tache supprimé avec succe");
     }
-    public Tache updateTacheStatus(int id, String newStatus) {
-        Optional<Tache> optionalTache = tacheRepo.findById(id);
-        if (optionalTache.isPresent()) {
-            Tache tache = optionalTache.get();
-            tache.setStatut(newStatus);
-            return tacheRepo.save(tache);
+
+    public Tache updateTacheStatus(int id, Tache tache) {
+        Optional<Tache> tacheData = tacheRepo.findById(id);
+
+        if (tacheData.isPresent()) {
+            Tache _tache = tacheData.get();
+            _tache.setStatut(tache.getStatut());
+            return tacheRepo.save(_tache);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tache n'existe pas");
         }
-        return null;
+
     }
 
 }

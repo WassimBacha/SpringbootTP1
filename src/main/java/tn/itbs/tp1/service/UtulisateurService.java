@@ -14,7 +14,7 @@ public class UtulisateurService {
 	
 @Autowired
 private UtulisateurRepo UserRepo ;
-public ResponseEntity<Object> addUser(Utulisateur user){
+public ResponseEntity<?> addUser(Utulisateur user){
 	UserRepo.findById(user.getId())
 	.ifPresentOrElse(u ->{throw new ResponseStatusException(HttpStatus.NOT_FOUND,"utulisateur existe deja"); },
 			()->{UserRepo.save(user);});
